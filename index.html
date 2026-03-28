@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио • Web Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap');
+        
+        :root {
+            --accent: #00d4ff;
+        }
+        
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .hero-gradient-text {
+            background: linear-gradient(90deg, #00d4ff, #7b61ff, #ff00c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 8s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .skill-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px -12px rgb(0 212 255 / 0.25);
+        }
+        
+        .case-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.1));
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .case-card:hover::before {
+            opacity: 1;
+        }
+        
+        .tag {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tag:hover {
+            background-color: #00d4ff;
+            color: #0a0a2a;
+            transform: scale(1.05);
+        }
+        
+        .navbar {
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a2a] text-white font-['Inter']">
+    <!-- NAVBAR -->
+    <nav class="navbar bg-[#0a0a2a]/80 border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#00d4ff] to-[#7b61ff] flex items-center justify-center text-xl font-bold">WD</div>
+                <span class="text-2xl font-semibold tracking-tighter">Web<span class="text-[#00d4ff]">Designer</span></span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#skills" class="hover:text-[#00d4ff]">Навыки</a>
+                <a href="#cases" class="hover:text-[#00d4ff]">Кейсы</a>
+                <a href="#tools" class="hover:text-[#00d4ff]">Инструменты</a>
+                <a href="#contact" class="hover:text-[#00d4ff]">Контакты</a>
+            </div>
+            
+            <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })"
+                    class="px-6 py-3 bg-white text-[#0a0a2a] rounded-3xl font-semibold flex items-center gap-x-2 hover:bg-[#00d4ff] hover:text-white">
+                <span>Давайте работать</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7-7 7" />
+                </svg>
+            </button>
+            
+            <!-- Мобильное меню -->
+            <button class="md:hidden text-3xl" onclick="this.nextElementSibling.classList.toggle('hidden')">
+                ☰
+            </button>
+            <div class="hidden md:hidden absolute top-16 left-0 right-0 bg-[#0a0a2a] border-b border-white/10 py-6 px-6 flex flex-col gap-4 text-lg">
+                <a href="#skills" class="hover:text-[#00d4ff]">Навыки</a>
+                <a href="#cases" class="hover:text-[#00d4ff]">Кейсы</a>
+                <a href="#tools" class="hover:text-[#00d4ff]">Инструменты</a>
+                <a href="#contact" class="hover:text-[#00d4ff]">Контакты</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO: Современный градиентный заголовок с эффектом прозрачности текста -->
+    <header class="min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(at_top_right,#00d4ff10_0%,transparent_70%)]"></div>
+        
+        <div class="max-w-screen-2xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-x-2 px-4 py-2 rounded-3xl bg-white/10 backdrop-blur-md text-sm font-medium">
+                    <div class="w-2 h-2 bg-[#00d4ff] rounded-full animate-pulse"></div>
+                    Доступен для новых проектов
+                </div>
+                
+                <h1 class="hero-gradient-text text-6xl md:text-7xl lg:text-8xl font-bold leading-none tracking-[-3px] font-['Space_Grotesk']">
+                    Создаю интерфейсы,<br>которые продают
+                </h1>
+                
+                <p class="max-w-lg text-xl text-white/70">
+                    Современный веб-дизайн с анимациями, градиентами и идеальной адаптивностью. 
+                    8+ лет опыта • Более 40 запущенных проектов
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="document.getElementById('cases').scrollIntoView({ behavior: 'smooth' })"
+                            class="px-8 py-4 bg-[#00d4ff] text-[#0a0a2a] rounded-3xl font-semibold text-lg flex items-center gap-x-3 hover:shadow-2xl hover:shadow-[#00d4ff]/50">
+                        Смотреть кейсы
+                        <span class="text-2xl">→</span>
+                    </button>
+                    <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })"
+                            class="px-8 py-4 border-2 border-white/30 hover:border-[#00d4ff] rounded-3xl font-semibold text-lg">
+                        Написать мне
+                    </button>
+                </div>
+                
+                <!-- Trust bar -->
+                <div class="flex items-center gap-x-8 text-white/60 text-sm">
+                    <div>Работал с:</div>
+                    <div class="flex -space-x-6">
+                        <div class="w-8 h-8 bg-white/10 rounded-2xl flex items-center justify-center text-xs">S</div>
+                        <div class="w-8 h-8 bg-white/10 rounded-2xl flex items-center justify-center text-xs">V</div>
+                        <div class="w-8 h-8 bg-white/10 rounded-2xl flex items-center justify-center text-xs">Y</div>
+                    </div>
+                    <div class="text-emerald-400">+15 компаний</div>
+                </div>
+            </div>
+            
+            <!-- Декоративный визуальный блок -->
+            <div class="relative hidden md:block">
+                <div class="aspect-square bg-gradient-to-br from-[#00d4ff] via-[#7b61ff] to-[#ff00c8] rounded-[4rem] rotate-12 shadow-2xl shadow-[#00d4ff]/30 flex items-center justify-center">
+                    <div class="bg-[#0a0a2a] w-[85%] h-[85%] rounded-[3rem] -rotate-12 flex flex-col items-center justify-center text-center p-12">
+                        <div class="text-8xl mb-6">✦</div>
+                        <p class="text-3xl font-semibold tracking-tighter hero-gradient-text">UI/UX • Motion • Brand</p>
+                        <p class="text-white/70 mt-4">Градиенты, стеклянный морфизм и плавные анимации — мой стиль</p>
+                    </div>
+                </div>
+                <!-- Плавающие акцентные элементы -->
+                <div class="absolute -top-6 -right-6 bg-white/10 backdrop-blur-xl px-5 py-3 rounded-3xl text-sm flex items-center gap-x-2 shadow-xl">
+                    <span class="text-[#00d4ff]">★</span> 4.98 рейтинг
+                </div>
+                <div class="absolute -bottom-8 left-12 bg-white/10 backdrop-blur-xl px-6 py-4 rounded-3xl text-sm font-medium">
+                    100% адаптивно
+                </div>
+            </div>
+        </div>
+        
+        <!-- Скролл-индикатор -->
+        <div class="absolute bottom-12 left-1/2 hidden md:flex flex-col items-center gap-y-2 text-white/40 text-xs tracking-widest">
+            <div>ПРОКРУТИТЬ</div>
+            <div class="w-px h-12 bg-gradient-to-b from-transparent via-white/40 to-transparent"></div>
+        </div>
+    </header>
+
+    <!-- НАВЫКИ: Карточки с анимацией при наведении -->
+    <section id="skills" class="max-w-screen-2xl mx-auto px-6 py-24">
+        <div class="flex flex-col md:flex-row items-end justify-between mb-16">
+            <div>
+                <span class="px-4 py-1.5 text-xs font-medium bg-white/10 rounded-3xl">ПРОФЕССИОНАЛЬНЫЕ НАВЫКИ</span>
+                <h2 class="text-5xl font-semibold tracking-tighter mt-3">Что я умею на 100%</h2>
+            </div>
+            <p class="max-w-md text-white/70 text-lg md:text-right">
+                Каждый навык — это не просто слово. Это сотни часов практики и десятки реализованных проектов.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Карточка 1 -->
+            <div class="skill-card bg-[#111133] border border-white/10 rounded-3xl p-8 flex flex-col">
+                <div class="text-5xl mb-6">🎨</div>
+                <h3 class="text-2xl font-semibold mb-2">UI/UX Дизайн</h3>
+                <p class="text-white/70 flex-1">Создаю интерфейсы, которые интуитивно понятны и вызывают эмоции. Figma + пользовательские исследования.</p>
+                <div class="mt-8 flex justify-between items-end">
+                    <span class="text-[#00d4ff] text-sm font-medium">Уровень: Expert</span>
+                    <div class="flex gap-x-1">
+                        <div class="h-2 w-8 bg-[#00d4ff]"></div>
+                        <div class="h-2 w-8 bg-[#00d4ff]"></div>
+                        <div class="h-2 w-8 bg-[#00d4ff]"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Карточка 2 -->
+            <div class="skill-card bg-[#111133] border border-white/10 rounded-3xl p-8 flex flex-col">
+                <div class="text-5xl mb-6">📱</div>
+                <h3 class="text-2xl font-semibold mb-2">Адаптивная верстка</h3>
+                <p class="text-white/70 flex-1">Pixel-perfect код, Tailwind, Framer Motion. Сайты идеально выглядят на любом устройстве.</p>
+                <div class="mt-8 flex justify-between items-end">
+                    <span class="text-[#00d4ff] text-sm font-medium">Уровень: Expert</span>
+                    <div class="flex gap-x-1">
+                        <div class="h-2 w-8 bg-[#00d4ff]"></div>
+                        <div class="h-2 w-8 bg-[#00d4ff]"></div>
+                        <div class="h-2 w-8 bg-[#00d4ff]"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Карточка 3 -->
+            <div class="skill-card bg-[#111133] border border-white/10 rounded-3xl p-8 flex flex-col">
+                <div class="text-5xl mb-6">✨</div>
+                <h3 class="text-2xl font-semibold mb-2">Motion &amp; Анимации</h3>
+                <p class="text-white/70 flex-1">Плавные микровзаимодействия, параллакс, 3D-элементы. Сайты оживают.</p>
+                <div class="mt-8 flex justify-between items-end">
+                    <span class="text-[#00d4ff] text-sm font-medium">Уровень: Advanced</span>
+                    <div class="flex gap-x-1">
+                        <div class="h-2 w-8 bg-[#00d4ff]"></div>
+                        <div class="h-2 w-8 bg-[#00d4ff]"></div>
+                        <div class="h-2 w-8 bg-white/30"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КЕЙСЫ: Выделенные блоки с примерами -->
+    <section id="cases" class="bg-white/5 py-24">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="px-4 py-1.5 text-xs font-medium bg-gradient-to-r from-[#00d4ff] to-[#7b61ff] text-white rounded-3xl">РЕАЛЬНЫЕ ПРОЕКТЫ</span>
+                <h2 class="text-5xl font-semibold tracking-tighter mt-3">Последние кейсы</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Кейс 1 -->
+                <div class="case-card bg-[#111133] rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="h-64 bg-[radial-gradient(#00d4ff33,#111133)] flex items-center justify-center text-7xl">📊</div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs uppercase tracking-widest font-medium text-[#00d4ff]">FinTech • 2025</span>
+                            <span class="px-3 py-1 bg-emerald-400/10 text-emerald-400 text-xs rounded-2xl">+340% конверсия</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Дашборд для инвестиционной платформы</h3>
+                        <p class="text-white/70 line-clamp-3">Полностью переработанный интерфейс с реал-тайм графиками, стеклянным морфизмом и анимациями данных.</p>
+                        <button class="mt-6 text-[#00d4ff] flex items-center gap-x-2 text-sm font-medium group-hover:gap-x-4">
+                            Подробнее о проекте 
+                            <span class="text-xl">→</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Кейс 2 -->
+                <div class="case-card bg-[#111133] rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="h-64 bg-gradient-to-br from-purple-500/20 to-[#111133] flex items-center justify-center text-7xl">🛍️</div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs uppercase tracking-widest font-medium text-[#00d4ff]">E-commerce • 2024</span>
+                            <span class="px-3 py-1 bg-amber-400/10 text-amber-400 text-xs rounded-2xl">Запуск за 18 дней</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Интернет-магазин премиум-одежды</h3>
+                        <p class="text-white/70 line-clamp-3">Современный дизайн с 3D-просмотром товаров, анимациями корзины и идеальной мобильной версией.</p>
+                        <button class="mt-6 text-[#00d4ff] flex items-center gap-x-2 text-sm font-medium group-hover:gap-x-4">
+                            Подробнее о проекте 
+                            <span class="text-xl">→</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Кейс 3 -->
+                <div class="case-card bg-[#111133] rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="h-64 bg-[radial-gradient(#7b61ff33,#111133)] flex items-center justify-center text-7xl">🏠</div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs uppercase tracking-widest font-medium text-[#00d4ff]">SaaS • 2025</span>
+                            <span class="px-3 py-1 bg-rose-400/10 text-rose-400 text-xs rounded-2xl">+120k пользователей</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Платформа для управления недвижимостью</h3>
+                        <p class="text-white/70 line-clamp-3">Чистый минималистичный дизайн с системой фильтров, картами и мощной анимацией загрузки данных.</p>
+                        <button class="mt-6 text-[#00d4ff] flex items-center gap-x-2 text-sm font-medium group-hover:gap-x-4">
+                            Подробнее о проекте 
+                            <span class="text-xl">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИНСТРУМЕНТЫ: Сетка в виде тегов -->
+    <section id="tools" class="max-w-screen-2xl mx-auto px-6 py-24">
+        <div class="text-center mb-12">
+            <span class="px-4 py-1.5 text-xs font-medium bg-white/10 rounded-3xl">ТЕХНОЛОГИИ И ИНСТРУМЕНТЫ</span>
+            <h2 class="text-5xl font-semibold tracking-tighter mt-3">Чем я пользуюсь каждый день</h2>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Figma</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Framer</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Webflow</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Tailwind CSS</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">GSAP</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">After Effects</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Spline 3D</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Adobe XD</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">React + Next.js</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Lottie</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Notion</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Midjourney</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">Principle</span>
+            <span class="tag px-6 py-3 bg-white/10 text-sm font-medium rounded-3xl">V0 by Vercel</span>
+        </div>
+    </section>
+
+    <!-- CTA + Контакты -->
+    <section id="contact" class="bg-gradient-to-b from-[#0a0a2a] to-[#111133] py-24 border-t border-white/10">
+        <div class="max-w-screen-2xl mx-auto px-6 text-center">
+            <h2 class="text-5xl font-semibold tracking-tighter mb-4">Готовы к новому уровню?</h2>
+            <p class="text-2xl text-white/70 max-w-lg mx-auto">Давайте создадим вместе что-то невероятное. Первый звонок — бесплатно.</p>
+            
+            <div class="mt-12 flex flex-col md:flex-row gap-6 justify-center items-center">
+                <a href="mailto:hello@yourdesign.ru" 
+                   class="flex-1 max-w-xs px-10 py-6 bg-[#00d4ff] text-[#0a0a2a] rounded-3xl text-xl font-semibold flex justify-center items-center gap-x-4 hover:scale-105">
+                    Написать на почту
+                    <span class="text-3xl">✉️</span>
+                </a>
+                <a href="https://t.me/yourdesign" 
+                   class="flex-1 max-w-xs px-10 py-6 border-2 border-[#00d4ff] text-white rounded-3xl text-xl font-semibold flex justify-center items-center gap-x-4 hover:bg-[#00d4ff] hover:text-[#0a0a2a]">
+                    Telegram
+                    <span class="text-3xl">📲</span>
+                </a>
+            </div>
+            
+            <p class="mt-16 text-white/40 text-sm">© 2026 Web Designer. Все права защищены. Полностью адаптивно на любом устройстве.</p>
+        </div>
+    </section>
+
+    <script>
+        // Инициализация Tailwind
+        document.addEventListener('DOMContentLoaded', () => {
+            return {
+                config(userConfig = {}) {
+                    return {
+                        content: [],
+                        theme: {
+                            extend: {},
+                        },
+                        plugins: [],
+                        ...userConfig,
+                    }
+                },
+                theme: {
+                    extend: {
+                        colors: {
+                            accent: '#00d4ff'
+                        }
+                    }
+                }
+            }
+        })
+        
+        // Дополнительная плавная анимация для мобильных карточек
+        console.log('%c✅ Красивый современный дизайн загружен! Готов к использованию.', 'color:#00d4ff; font-size:13px; font-family:monospace')
+    </script>
+</body>
+</html>
+```
